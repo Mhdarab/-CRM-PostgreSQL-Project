@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LoginWindow</class>
+ <widget class="QWidget" name="LoginWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>440</width>
+    <height>640</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>CRM Login</string>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>380</width>
+    <height>560</height>
+   </size>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#LoginWindow {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+        stop:0 #0f2027, stop:0.5 #203a43, stop:1 #2c5364);
+}
+
+QFrame#frmCard {
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+}
+
+QLabel#lblLogo {
+    font-size: 30px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 4px;
+}
+
+QLabel#lblSubtitle {
+    color: #b0bec5;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+QLabel#lblField {
+    color: #90a4ae;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+QLineEdit {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 13px;
+    min-height: 22px;
+    selection-background-color: #26c6da;
+}
+QLineEdit:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+QLineEdit:focus {
+    border: 2px solid #26c6da;
+    background-color: rgba(255, 255, 255, 0.14);
+}
+
+QCheckBox#chkShow {
+    color: #cfd8dc;
+    font-size: 12px;
+    spacing: 8px;
+}
+QCheckBox#chkShow::indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 2px solid #607d8b;
+    background-color: transparent;
+}
+QCheckBox#chkShow::indicator:hover {
+    border-color: #26c6da;
+}
+QCheckBox#chkShow::indicator:checked {
+    background-color: #26c6da;
+    border-color: #26c6da;
+}
+
+QPushButton#btnLogin {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+        stop:0 #00acc1, stop:1 #26c6da);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px;
+    min-height: 40px;
+    letter-spacing: 1px;
+}
+QPushButton#btnLogin:hover {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+        stop:0 #26c6da, stop:1 #4dd0e1);
+}
+QPushButton#btnLogin:pressed {
+    background: #00838f;
+}
+
+QPushButton#btnExit {
+    background-color: transparent;
+    color: #cfd8dc;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px;
+    min-height: 36px;
+}
+QPushButton#btnExit:hover {
+    border-color: #ef5350;
+    color: #ef5350;
+}
+
+QLabel#lblError {
+    color: #ff5252;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px;
+}
+
+QLabel#lblForgot {
+    color: #90a4ae;
+    font-size: 12px;
+}
+QLabel#lblForgot:hover {
+    color: #26c6da;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="rootLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>30</number>
+   </property>
+   <property name="topMargin">
+    <number>30</number>
+   </property>
+   <property name="rightMargin">
+    <number>30</number>
+   </property>
+   <property name="bottomMargin">
+    <number>30</number>
+   </property>
+   <item>
+    <widget class="QFrame" name="frmCard">
+     <layout class="QVBoxLayout" name="cardLayout">
+      <property name="spacing">
+       <number>14</number>
+      </property>
+      <property name="leftMargin">
+       <number>36</number>
+      </property>
+      <property name="topMargin">
+       <number>40</number>
+      </property>
+      <property name="rightMargin">
+       <number>36</number>
+      </property>
+      <property name="bottomMargin">
+       <number>36</number>
+      </property>
+
+      <item>
+       <widget class="QLabel" name="lblLogo">
+        <property name="text">
+         <string>WER:HERE</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+
+      <item>
+       <widget class="QLabel" name="lblSubtitle">
+        <property name="text">
+         <string>Customer Relationship Management</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+
+      <item>
+       <spacer name="spacerTop">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+
+      <item>
+       <widget class="QLabel" name="lblUser">
+        <property name="text">
+         <string>USERNAME</string>
+        </property>
+        <property name="objectName">
+         <string>lblField</string>
+        </property>
+       </widget>
+      </item>
+
+      <item>
+       <widget class="QLineEdit" name="txtUsername">
+        <property name="placeholderText">
+         <string>Enter your username</string>
+        </property>
+       </widget>
+      </item>
+
+      <item>
+       <widget class="QLabel" name="lblPass">
+        <property name="text">
+         <string>PASSWORD</string>
+        </property>
+       </widget>
+      </item>
+
+      <item>
+       <widget class="QLineEdit" name="txtPassword">
+        <property name="placeholderText">
+         <string>Enter your password</string>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+       </widget>
+      </item>
+
+      <item>
+       <layout class="QHBoxLayout" name="rowShow">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item>
+         <spacer name="spacerShow">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="chkShow">
+          <property name="text">
+           <string>Show password</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+
+      <item>
+       <widget class="QLabel" name="lblError">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+
+      <item>
+       <widget class="QPushButton" name="btnLogin">
+        <property name="text">
+         <string>LOGIN</string>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+       </widget>
+      </item>
+
+      <item>
+       <widget class="QPushButton" name="btnExit">
+        <property name="text">
+         <string>EXIT</string>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+       </widget>
+      </item>
+
+      <item>
+       <spacer name="spacerBottom">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>10</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+
+      <item>
+       <widget class="QLabel" name="lblForgot">
+        <property name="text">
+         <string>Forgot password?</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

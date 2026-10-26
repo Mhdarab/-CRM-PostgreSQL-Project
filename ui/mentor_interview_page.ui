@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MentorInterviewPage</class>
+ <widget class="QWidget" name="MentorInterviewPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1240</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>900</width>
+    <height>560</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>CRM - Mentor Interview</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#MentorInterviewPage {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+        stop:0 #0b1220, stop:1 #111c33);
+}
+
+/* ---------- Header card ---------- */
+QFrame#headerFrame {
+    background-color: #131c2e;
+    border: 1px solid #26344f;
+    border-radius: 14px;
+}
+
+QLabel#headerIcon {
+    font-size: 34px;
+    color: #22d3ee;
+    padding-left: 8px;
+}
+
+QLabel#headerTitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e6edf7;
+}
+
+QLabel#headerSubtitle {
+    font-size: 13px;
+    color: #8b9bb4;
+}
+
+QLabel#headerBadge {
+    font-size: 11px;
+    font-weight: 700;
+    color: #22d3ee;
+    background-color: rgba(34, 211, 238, 0.16);
+    border: 1px solid transparent;
+    border-radius: 11px;
+    padding: 4px 12px;
+}
+QLabel#headerBadge[admin="true"] {
+    color: #fbbf24;
+    background-color: rgba(251, 191, 36, 0.14);
+}
+
+/* ---------- Toolbar card ---------- */
+QFrame#cardFrame {
+    background-color: #131c2e;
+    border: 1px solid #26344f;
+    border-radius: 14px;
+}
+
+/* ---------- Search input ---------- */
+QLineEdit#searchInput {
+    background-color: #0b1220;
+    color: #e6edf7;
+    border: 1px solid #26344f;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    min-height: 20px;
+    selection-background-color: #22d3ee;
+    selection-color: #04222b;
+}
+QLineEdit#searchInput:hover {
+    border-color: #8b9bb4;
+}
+QLineEdit#searchInput:focus {
+    border: 1px solid #22d3ee;
+}
+
+/* ---------- Buttons (default = primary cyan) ---------- */
+QPushButton {
+    background-color: #22d3ee;
+    color: #04222b;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 13px;
+    min-height: 20px;
+}
+QPushButton:hover   { background-color: #67e8f9; }
+QPushButton:pressed { background-color: #06b6d4; }
+
+/* ---------- All Conversations (secondary) ---------- */
+QPushButton#allConversationsButton {
+    background-color: #1b2740;
+    color: #e6edf7;
+    border: 1px solid #26344f;
+}
+QPushButton#allConversationsButton:hover {
+    border-color: #22d3ee;
+    color: #22d3ee;
+}
+QPushButton#allConversationsButton:pressed {
+    background-color: #26344f;
+}
+
+/* ---------- Return (secondary) ---------- */
+QPushButton#returnButton {
+    background-color: #1b2740;
+    color: #e6edf7;
+    border: 1px solid #26344f;
+}
+QPushButton#returnButton:hover {
+    border-color: #22d3ee;
+    color: #22d3ee;
+}
+QPushButton#returnButton:pressed {
+    background-color: #26344f;
+}
+
+/* ---------- ComboBox ---------- */
+QComboBox#categoryComboBox {
+    background-color: #0b1220;
+    color: #e6edf7;
+    border: 1px solid #26344f;
+    border-radius: 10px;
+    padding: 10px 14px;
+    min-height: 20px;
+    font-size: 13px;
+}
+QComboBox#categoryComboBox:hover {
+    border-color: #8b9bb4;
+}
+QComboBox#categoryComboBox:focus {
+    border: 1px solid #22d3ee;
+}
+QComboBox#categoryComboBox::drop-down {
+    border: none;
+    width: 30px;
+}
+QComboBox#categoryComboBox::down-arrow {
+    image: none;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #8b9bb4;
+    width: 0;
+    height: 0;
+    margin-right: 10px;
+}
+QComboBox#categoryComboBox QAbstractItemView {
+    background-color: #131c2e;
+    color: #e6edf7;
+    border: 1px solid #26344f;
+    outline: 0;
+    padding: 4px;
+    selection-background-color: rgba(34, 211, 238, 0.16);
+    selection-color: #e6edf7;
+}
+
+/* ---------- Table ---------- */
+QTableWidget#conversationsTable {
+    background-color: #131c2e;
+    alternate-background-color: #162136;
+    color: #e6edf7;
+    border: 1px solid #26344f;
+    border-radius: 12px;
+    outline: 0;
+    gridline-color: transparent;
+    font-size: 13px;
+    selection-background-color: rgba(34, 211, 238, 0.16);
+    selection-color: #e6edf7;
+}
+QTableWidget#conversationsTable::item {
+    padding: 4px 10px;
+    border: none;
+}
+QTableWidget#conversationsTable::item:selected {
+    background-color: rgba(34, 211, 238, 0.16);
+    color: #e6edf7;
+}
+QHeaderView {
+    background: transparent;
+}
+QHeaderView::section {
+    background-color: #1b2740;
+    color: #8b9bb4;
+    padding: 11px 12px;
+    border: none;
+    border-bottom: 1px solid #26344f;
+    font-size: 11px;
+    font-weight: 700;
+}
+QTableCornerButton::section {
+    background-color: #1b2740;
+    border: none;
+}
+
+/* ---------- Status label ---------- */
+QLabel#statusLabel {
+    color: #8b9bb4;
+    font-size: 12px;
+    padding: 4px 8px;
+}
+QLabel#statusLabel[error="true"] {
+    color: #f87171;
+    font-weight: 600;
+}</string>
+  </property>
+
+  <layout class="QVBoxLayout" name="rootLayout">
+   <property name="spacing">
+    <number>16</number>
+   </property>
+   <property name="leftMargin">
+    <number>30</number>
+   </property>
+   <property name="topMargin">
+    <number>26</number>
+   </property>
+   <property name="rightMargin">
+    <number>30</number>
+   </property>
+   <property name="bottomMargin">
+    <number>22</number>
+   </property>
+
+   <!-- ================= HEADER ================= -->
+   <item>
+    <widget class="QFrame" name="headerFrame">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <layout class="QHBoxLayout" name="headerLayout">
+      <property name="spacing">
+       <number>14</number>
+      </property>
+      <property name="leftMargin">
+       <number>20</number>
+      </property>
+      <property name="topMargin">
+       <number>18</number>
+      </property>
+      <property name="rightMargin">
+       <number>20</number>
+      </property>
+      <property name="bottomMargin">
+       <number>18</number>
+      </property>
+
+      <item>
+       <widget class="QLabel" name="headerIcon">
+        <property name="text">
+         <string>🎓</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+
+      <item>
+       <layout class="QVBoxLayout" name="headerTextLayout">
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="headerTitle">
+          <property name="text">
+           <string>Mentor Interview</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="headerSubtitle">
+          <property name="text">
+           <string>Conversations and recommendations from mentors</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+
+      <item>
+       <spacer name="headerSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+
+      <item>
+       <widget class="QLabel" name="headerBadge">
+        <property name="text">
+         <string>USER</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- ================= TOOLBAR CARD ================= -->
+   <item>
+    <widget class="QFrame" name="cardFrame">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <layout class="QVBoxLayout" name="cardLayout">
+      <property name="spacing">
+       <number>12</number>
+      </property>
+      <property name="leftMargin">
+       <number>18</number>
+      </property>
+      <property name="topMargin">
+       <number>16</number>
+      </property>
+      <property name="rightMargin">
+       <number>18</number>
+      </property>
+      <property name="bottomMargin">
+       <number>16</number>
+      </property>
+
+      <!-- Search input (no button — live search) -->
+      <item>
+       <widget class="QLineEdit" name="searchInput">
+        <property name="placeholderText">
+         <string>🔍  Search by candidate name or surname — e.g. “As”</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+
+      <!-- All Conversations + Combo row -->
+      <item>
+       <layout class="QHBoxLayout" name="actionsRow">
+        <property name="spacing">
+         <number>10</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="allConversationsButton">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>💬  All Conversations</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="categoryComboBox">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="toolTip">
+           <string>Show only one recommendation</string>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
+          </property>
+          <property name="minimumContentsLength">
+           <number>30</number>
+          </property>
+          <item>
+           <property name="text">
+            <string>All Recommendations</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Suitable to participate in the entire VIT project</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Suitable to take initial IT training through the VIT project and then be directed to ITPH</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Suitable to take English training through the VIT project and then be directed to ITPH</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Suitable to be directed straight to ITPH within the VIT project.</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Suitable to be directed to work through direct individual coaching</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>More suitable to participate in the next VIT project</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Should be directed to another sector</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Other</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- ================= TABLE ================= -->
+   <item>
+    <widget class="QTableWidget" name="conversationsTable">
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="showGrid">
+      <bool>false</bool>
+     </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderHighlightSections">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>DATE</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>VIT GROUP</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>CANDIDATE NAME</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>MENTOR NAME</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>SCORE</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>RECOMMENDATION</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>SECONDARY SCORE</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>NOTES</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+
+   <!-- ================= FOOTER ================= -->
+   <item>
+    <layout class="QHBoxLayout" name="footerLayout">
+     <property name="spacing">
+      <number>10</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="statusLabel">
+       <property name="text">
+        <string></string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="footerSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="returnButton">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="text">
+        <string>←  Return to Preferences Screen</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,28 @@
+/* Shared theme for CRM Capstone Project */
+
+QWidget {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+QLineEdit {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #444;
+}
+
+QPushButton {
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+}
+
+QTableWidget {
+    border-radius: 6px;
+}
+
+QHeaderView::section {
+    padding: 8px;
+    border: none;
+}

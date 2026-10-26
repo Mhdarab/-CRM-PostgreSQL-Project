@@ -1,0 +1,81 @@
+/* ============================================
+   Admin Pages 
+   Dana - Accent: Red (#F44336) and Purple (#9C27B0)
+   ============================================ */
+
+/* Global */
+QWidget {
+    background-color: #2e1e1e;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* Titles */
+QLabel#title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #F44336;
+    padding-bottom: 8px;
+}
+
+/* Inputs */
+QLineEdit, QComboBox {
+    padding: 8px;
+    border-radius: 6px;
+    background-color: #3e2e2e;
+    border: 1px solid #555;
+    color: #ffffff;
+}
+
+QLineEdit:focus, QComboBox:focus {
+    border: 1px solid #F44336;
+}
+
+/* Buttons */
+QPushButton {
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #F44336;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+}
+
+QPushButton:hover {
+    background-color: #D32F2F;
+}
+
+QPushButton:pressed {
+    background-color: #B71C1C;
+}
+
+/* Special buttons */
+QPushButton#returnBtn {
+    background-color: #607D8B;
+}
+QPushButton#returnBtn:hover {
+    background-color: #455A64;
+}
+
+QPushButton#exitBtn {
+    background-color: #333333;
+}
+QPushButton#exitBtn:hover {
+    background-color: #444444;
+}
+
+/* Tables */
+QTableWidget {
+    background-color: #3e2e2e;
+    color: #ffffff;
+    gridline-color: #555555;
+    border-radius: 6px;
+}
+
+QHeaderView::section {
+    background-color: #F44336;
+    color: #ffffff;
+    padding: 8px;
+    border: none;
+}
