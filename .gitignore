@@ -218,3 +218,20 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Private CSV data
+data/
+
+credentials/
+
+# Old Google Sheets backup
+legacy_backup/
+
+# VS Code local settings
+.vscode/
+
+# Local database import and checking scripts
+import_*.py
+check_*.py
+test_database.py
+test_postgres_applications.py

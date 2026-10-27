@@ -9,15 +9,13 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
     QApplication, QButtonGroup, QHBoxLayout, QLineEdit, QTableWidget, QVBoxLayout, QWidget,
 )
-
-from services.data_service import (
-    get_all_interviews, get_projects_received, get_projects_sent,
-    get_last_error, name_matches,
-)
+from PyQt6 import QtWidgets
+from services.search_utils import name_matches
 from theme import (
     apply_theme, center, make_button, make_card, make_status, page_header,
     populate, set_status, style_table,
 )
+from services.postgres_data_service import PostgreSQLDataService
 
 # Columns in the Interviews sheet
 COLS = ["Full Name", "Project Sent Date", "Project Received Date"]
@@ -28,13 +26,15 @@ class InterviewsPage(QWidget):
     def __init__(self, is_admin=False):
         super().__init__()
         self.is_admin = is_admin
+        self.postgres_service = PostgreSQLDataService()
         self.rows = []              # rows of the active filter (before search)
         apply_theme(self)
         self.setWindowTitle("CRM - Interviews")
         self.resize(1000, 660)
         center(self)
         self.init_ui()
-        self.load(get_all_interviews, chip=self.all_chip)
+        self.load(self.postgres_service.get_all_interviews, chip=self.all_chip)
+        
 
     # --------------------------------------------------
     def init_ui(self):
@@ -55,9 +55,20 @@ class InterviewsPage(QWidget):
         self.group = QButtonGroup(self)
         chips = QHBoxLayout()
         chips.setSpacing(8)
-        self.all_chip = self._chip("All Interviews", lambda: self.load(lambda: get_all_interviews(refresh=True)), chips)
-        self.sent_chip = self._chip("Projects Sent", lambda: self.load(get_projects_sent), chips)
-        self.recv_chip = self._chip("Projects Received", lambda: self.load(get_projects_received), chips)
+        self.all_chip = self._chip(
+            "All Interviews",
+            lambda: self.load(self.postgres_service.get_all_interviews),
+            chips
+        )
+        self.sent_chip = self._chip("Projects Sent",
+            lambda: self.load(self.postgres_service.get_projects_sent),
+            chips
+        )
+        self.recv_chip = self._chip(
+            "Projects Received",
+            lambda: self.load(self.postgres_service.get_projects_received),
+            chips
+        )
         chips.addStretch()
         tl.addLayout(chips)
         root.addWidget(toolbar)
@@ -81,28 +92,43 @@ class InterviewsPage(QWidget):
 
     # --------------------------------------------------
     def load(self, func, chip=None):
-        """Fetch rows for a filter, clear the search, show them."""
+        """Load interview records safely from PostgreSQL."""
+
         if chip:
             chip.setChecked(True)
+
         self.search_input.blockSignals(True)
         self.search_input.clear()
         self.search_input.blockSignals(False)
+
         QApplication.setOverrideCursor(Qt.CursorShape.WaitCursor)
+
         try:
             self.rows = func()
+
+        except Exception as error:
+            self.rows = []
+
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Database Error",
+                f"Could not load interviews:\n{error}"
+            )
+
         finally:
             QApplication.restoreOverrideCursor()
+
         self.render()
 
     def render(self):
         q = self.search_input.text().strip()
         rows = [r for r in self.rows if name_matches(q, r.get(NAME_COL, ""))] if q else self.rows
         populate(self.table, COLS, rows)
-        err = get_last_error()
-        if err:
-            set_status(self.status, f"⚠  {err}", True)
-        elif q:
-            set_status(self.status, f"{len(rows)} of {len(self.rows)} record(s) match “{q}”")
+        if q:
+            set_status(
+                self.status,
+                f"{len(rows)} of {len(self.rows)} record(s) match “{q}”"
+            )
         else:
             set_status(self.status, f"{len(rows)} record(s)")
 

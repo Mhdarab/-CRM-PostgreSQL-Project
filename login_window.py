@@ -16,7 +16,8 @@ from PyQt6.QtCore import Qt
 
 from login import Ui_LoginWindow
 
-from services.google_drive_service import authenticate
+from services.auth_service import authenticate
+
 from theme import LOGIN_QSS, center
 
 
@@ -145,6 +146,9 @@ class LoginWindow(QWidget):
         # ---------- 3. Authenticate ----------
         try:
             success, role, message = authenticate(username, password)
+            print("Login success:", success)
+            print("Login role:", role)
+            print("Login message:", message)
         except Exception as e:
             self.set_loading(False)
             self.show_error(f"Connection error: {e}")

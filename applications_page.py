@@ -2,7 +2,7 @@ import os
 
 from PyQt6 import QtWidgets, uic
 
-from services import data_service
+from services.postgres_data_service import PostgreSQLDataService
 from theme import apply_theme, style_table
 
 
@@ -13,6 +13,7 @@ class ApplicationsPage(QtWidgets.QWidget):
     def __init__(self, is_admin=False):
         super().__init__()
         self.is_admin = is_admin
+        self.postgres_service = PostgreSQLDataService()
 
         # 1. Load the Qt Designer UI once
         ui_path = os.path.join(
@@ -106,13 +107,7 @@ class ApplicationsPage(QtWidgets.QWidget):
 
     def display_results(self, result):
         """Display service results without changing source keys."""
-        error = data_service.get_last_error()
-
-        if error:
-            QtWidgets.QMessageBox.warning(
-                self, "Data Error", error
-            )
-            return
+        
 
         headers, rows = result
         table = self.applicationsTable
@@ -175,36 +170,110 @@ class ApplicationsPage(QtWidgets.QWidget):
             self.show_all_applications()
             return
 
-        result = data_service.search_applications(query)
-        self.display_results(result)
+        try:
+            result = self.postgres_service.search_applications(query)
+            self.display_results(result)
+
+        except Exception as error:
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Database Error",
+                str(error)
+            )
 
     def show_all_applications(self):
-        result = data_service.get_applications()
-        self.display_results(result)
+        try:
+            result = self.postgres_service.get_applications()
+
+            # PostgreSQL returned the data successfully
+            headers, rows = result
+
+            print("Applications loaded from PostgreSQL:", len(rows))
+
+            self.display_results((headers, rows))
+
+        except Exception as error:
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Database Error",
+                str(error)
+            )
 
     def show_mentor_defined(self):
-        result = data_service.get_mentor_defined()
-        self.display_results(result)
+        try:
+            result = self.postgres_service.get_mentor_defined()
+            self.display_results(result)
+
+        except Exception as error:
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Database Error",
+                str(error)
+            )
+
 
     def show_mentor_not_defined(self):
-        result = data_service.get_mentor_not_defined()
-        self.display_results(result)
+        try:
+            result = self.postgres_service.get_mentor_not_defined()
+            self.display_results(result)
+
+        except Exception as error:
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Database Error",
+                str(error)
+            )
 
     def show_previous_vit(self):
-        result = data_service.get_previous_vit()
-        self.display_results(result)
+        try:
+            result = self.postgres_service.get_previous_vit()
+            self.display_results(result)
+
+            headers, rows = result
+            print(f"Previous VIT: {len(rows)} records")
+
+        except Exception as error:
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Database Error",
+                str(error)
+            )
 
     def show_duplicates(self):
-        result = data_service.get_duplicate_applications()
-        self.display_results(result)
+        try:
+            result = self.postgres_service.get_duplicate_applications()
+            self.display_results(result)
+
+        except Exception as error:
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Database Error",
+                str(error)
+            )
 
     def show_different_records(self):
-        result = data_service.get_different_records()
-        self.display_results(result)
+        try:
+            headers, rows = self.postgres_service.get_different_records()
+            self.display_results((headers, rows))
+            print(f"Different Records: {len(rows)} records")
+
+        except Exception as error:
+            print("Error loading different records:", error)
 
     def show_unique_applications(self):
-        result = data_service.get_unique_applications()
-        self.display_results(result)
+        try:
+            headers, rows = self.postgres_service.get_unique_applications()
+
+            self.display_results((headers, rows))
+
+            print(f"Unique Applications: {len(rows)} records")
+
+        except Exception as error:
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Database Error",
+                str(error)
+            )
 
     def open_preferences(self):
         if self.is_admin:
