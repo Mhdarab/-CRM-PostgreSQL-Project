@@ -15,8 +15,16 @@ from googleapiclient.discovery import build
 # --------------------------------------------------
 # CONFIG
 # --------------------------------------------------
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CREDENTIALS_FILE = os.path.join(BASE_DIR, "credentials", "service_account.json")
+import sys
+
+if getattr(sys, "frozen", False):
+    BASE_DIR = os.path.dirname(sys.executable)
+else:
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+CREDENTIALS_FILE = os.path.join(
+    BASE_DIR, "credentials", "service_account.json"
+)
 
 # 👉 Paste your Calendar ID here
 CALENDAR_ID = "isaacwaseem257@gmail.com"

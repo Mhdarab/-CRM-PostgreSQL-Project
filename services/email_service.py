@@ -3,9 +3,17 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dotenv import load_dotenv
+import sys
 
 
-load_dotenv()
+if getattr(sys, "frozen", False):
+    BASE_DIR = os.path.dirname(sys.executable)
+else:
+    BASE_DIR = os.path.dirname(
+        os.path.dirname(os.path.abspath(__file__))
+    )
+
+load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
